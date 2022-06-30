@@ -1,13 +1,1 @@
-task copyDocs(type: Copy) {         //Task vom Typ Cope
-    from "src"
-    into "build/docs"
-    include "**/*md"
-    includeEmptyDirs = false
-}
-
-task createZip(type: Zip) {        //Task vom Typ Zip
-    from "build/docs"
-    archiveFileName = "docs.zip"
-    destinationDirectory = file("build/dist")
-    dependsOn copyDocs                         //fängt erst an, wenn copyDocs beendet ist
-}
+apply from: "archiving.gradle"
