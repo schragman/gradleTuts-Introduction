@@ -1,0 +1,136 @@
+import java.text.SimpleDateFormat
+
+SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy' T 'HH:mm")
+sdf.setTimeZone(TimeZone.getTimeZone("GMT"))
+
+println "Hello world " + sdf.format(new Date());
+
+sayHelloWorld()
+
+void sayHelloWorld() {
+    println "Hello World!"
+}
+
+Integer doubleIt(Integer i) {
+    println(i)
+    i * 3
+    Integer y = i
+}
+
+println doubleIt(2)
+
+def s3 = """ a
+string
+on 
+multible
+lines
+"""
+println s3
+
+//Interpolation
+def x = 4
+println "x ist $x"
+
+def myCourse = "gradle"
+println "I'm training in: ${myCourse.toUpperCase()}"
+
+//Properties
+class Person {
+    String name
+    Integer age
+
+    Person(name, age) {
+        this.name = name
+        this.age = age
+    }
+}
+
+def p1 = new Person("Fred", 35)
+println p1.age
+p1.age = 36
+println p1.age
+
+//with Map
+Map m = new HashMap()
+
+m.put("Audi", 2000)  //Java
+println m.get("Audi")
+
+m.bmw = 5000   //Groovy
+println m.bmw
+
+//Closures
+
+def echoIt = { String parameter ->
+    println parameter
+}
+
+println echoIt("Hello World!")
+
+Closure echoIt2 = {
+    println it
+}
+
+echoIt2("Hello World2!")
+
+def twoArgMethod(factor, closure) {
+    closure() * factor
+}
+
+println twoArgMethod(3, {10})
+
+
+def oneArgMethod(closure) {
+    closure() * 2
+}
+
+def i = oneArgMethod {
+    def y = 3
+    y * 2
+}
+
+assert i == 12
+
+[1,2,3].each {
+    println it
+}
+
+class Person1 {
+    String name = "Fred"
+    Closure nameSayer = {
+        println name
+    }
+}
+
+def person1 = new Person1()
+println person1.name
+
+
+def theName = "John"
+def sayName = {
+    println theName
+}
+sayName()
+
+theName = "Bill"
+
+sayName()
+
+class Person2 {
+    String theName2
+    Integer theAge2
+
+    Person2(theName2, theAge2) {
+        this.theName2 = theName2
+        this.theAge2 = theAge2
+    }
+
+    def executeInside(Closure c) {
+        c.delegate = this
+        c()
+    }
+}
+
+def p22 = new Person2("Fred2", 35)
+//println p22.theName2
+p22.executeInside {println theName2}
